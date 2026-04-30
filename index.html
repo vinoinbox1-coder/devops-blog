@@ -552,9 +552,10 @@
         <p>Fresh insights across GitHub, cloud platforms, containers, Linux, and AI-powered operations.</p>
       </div>
       <div class="grid grid-cols-3">
-        <a class="card" href="#">
+        <a class="card" href="#github-actions">
           <h3>GitHub Actions at scale</h3>
-          <p>Design reusable workflow templates, secure pipeline execution, and shift-left compliance for enterprise teams.</p>
+          <p>Getting started with GitHub Actions, workflow structure, secrets management, and Terraform automation.</p>
+          <p style="margin-top: 16px; font-size: 0.95rem; color: var(--accent); font-weight: 700;">Read the full GitHub Actions post →</p>
         </a>
         <a class="card" href="#">
           <h3>Docker security in production</h3>
@@ -576,6 +577,106 @@
           <h3>Agentic AI for operations</h3>
           <p>Build intelligent AI agents that automate incident response, runbook execution, and continuous improvement.</p>
         </a>
+      </div>
+    </section>
+    <section class="section" id="github-actions">
+      <div class="section-heading">
+        <h2>🚀 Getting Started with GitHub Actions</h2>
+        <p>Automate your DevOps workflow using GitHub Actions, from builds and tests to Terraform and Kubernetes deployments.</p>
+      </div>
+      <div class="card" style="max-width: 980px; margin: 0 auto; padding: 36px;">
+        <h3>Why GitHub Actions matters</h3>
+        <p>In today’s DevOps-driven world, automation is not optional—it’s essential. GitHub Actions lets you automate everything directly from your repository, including deployments, tests, and infrastructure provisioning.</p>
+        <h4>What is GitHub Actions?</h4>
+        <p>GitHub Actions is a <strong>CI/CD platform</strong> built into GitHub that enables workflows for:</p>
+        <ul>
+          <li>Building code</li>
+          <li>Running tests</li>
+          <li>Deploying applications</li>
+          <li>Managing infrastructure (Terraform, Kubernetes, etc.)</li>
+        </ul>
+        <h4>Key concepts</h4>
+        <ul>
+          <li><strong>Workflow</strong> — an automated process defined in a YAML file.</li>
+          <li><strong>Event</strong> — triggers that start a workflow, like <code>push</code> or <code>pull_request</code>.</li>
+          <li><strong>Job</strong> — a set of steps that run on the same machine.</li>
+          <li><strong>Step</strong> — an individual task, such as running a command or using an action.</li>
+          <li><strong>Runner</strong> — the machine on which the workflow executes.</li>
+        </ul>
+        <h4>Your first workflow</h4>
+        <p>Create <code>.github/workflows/main.yml</code> to start automating your DevOps pipeline.</p>
+        <pre style="background: rgba(15,23,42,0.08); border-radius: 16px; padding: 18px; overflow-x: auto;">name: CI Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run a simple command
+        run: echo "Hello, DevOps 🚀"
+        </pre>
+        <h4>Terraform workflow</h4>
+        <p>Build a practical pipeline for infrastructure validation and planning.</p>
+        <pre style="background: rgba(15,23,42,0.08); border-radius: 16px; padding: 18px; overflow-x: auto;">name: Terraform CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan
+        </pre>
+        <h4>Managing secrets</h4>
+        <p>Never hardcode credentials. Store values securely in GitHub Secrets.</p>
+        <p> Example secrets:</p>
+        <ul>
+          <li><code>GCP_CREDENTIALS</code></li>
+          <li><code>AWS_ACCESS_KEY</code></li>
+        </ul>
+        <p>Use them in workflows:</p>
+        <pre style="background: rgba(15,23,42,0.08); border-radius: 16px; padding: 18px; overflow-x: auto;">env:
+  GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+        </pre>
+        <h4>Advanced use cases</h4>
+        <p><strong>Cloud deployment</strong> with secure pipeline authentication, multi-environment workflows, and matrix builds for parallel jobs.</p>
+        <ul>
+          <li>Use <code>google-github-actions/auth@v2</code> for GCP auth.</li>
+          <li>Map branches to environments: <code>dev</code>, <code>stage</code>, <code>main</code>.</li>
+          <li>Use matrix builds to run jobs across multiple runtimes.</li>
+        </ul>
+        <h4>Best practices</h4>
+        <ul>
+          <li>Keep workflows small and modular.</li>
+          <li>Use reusable actions.</li>
+          <li>Store secrets securely.</li>
+          <li>Separate CI and CD.</li>
+          <li>Add approvals for production.</li>
+        </ul>
+        <p><strong>Final thoughts:</strong> GitHub Actions is a full automation engine for your DevOps lifecycle. Use it to automate infrastructure, deploy applications, and maintain consistent environments across dev, stage, and prod.</p>
       </div>
     </section>
 
