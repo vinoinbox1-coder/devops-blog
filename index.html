@@ -6,156 +6,411 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
+    :root {
+      color-scheme: light;
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-strong: #0f172a;
+      --text: #0f172a;
+      --muted: #64748b;
+      --accent: #0f766e;
+      --accent-2: #6366f1;
+      --border: rgba(15, 23, 42, 0.08);
+      --shadow: 0 22px 60px rgba(15, 23, 42, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #ffffff;
-      color: #0f172a;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at top, #eef2ff 0%, #f8fafc 40%, #ffffff 100%);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
     header {
-      background: #ffffff;
-      padding: 20px;
-      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(12px);
+      background: rgba(248, 250, 252, 0.96);
+      border-bottom: 1px solid var(--border);
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 32px;
-      color: #0f172a;
+    .navbar {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .logo {
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
+    .logo span {
+      color: var(--accent);
     }
 
     nav {
-      text-align: center;
-      padding: 10px;
-      background: #1e293b;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
     }
 
     nav a {
-      color: #38bdf8;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
+      font-size: 0.95rem;
+      color: var(--muted);
+      transition: color 0.2s ease;
     }
 
     nav a:hover {
-      color: #22c55e;
-    }
-
-    section {
-      padding: 40px 20px;
+      color: var(--surface-strong);
     }
 
     .hero {
-      text-align: center;
-      padding: 60px 20px;
-    }
-
-    .hero h2 {
-      font-size: 40px;
-      color: #22c55e;
-    }
-
-    .container {
+      min-height: calc(100vh - 72px);
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      padding: 20px;
+      place-items: center;
+      padding: 80px 24px 90px;
+    }
+
+    .hero-inner {
+      max-width: 920px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2.8rem, 4vw, 4.5rem);
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+    }
+
+    .hero p {
+      margin: 0 auto 32px;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform 0.25s ease, background-color 0.25s ease;
+      padding: 14px 28px;
+    }
+
+    .button-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .button-primary:hover {
+      transform: translateY(-1px);
+      background: #115e54;
+    }
+
+    .button-secondary {
+      border: 1px solid rgba(15, 23, 42, 0.12);
+      color: var(--surface-strong);
+      background: #ffffff;
+    }
+
+    .button-secondary:hover {
+      background: rgba(15, 23, 42, 0.05);
+      transform: translateY(-1px);
+    }
+
+    .section {
+      padding: 64px 24px;
+    }
+
+    .section-heading {
+      max-width: 760px;
+      margin: 0 auto 34px;
+      text-align: center;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .section-heading p {
+      margin: 14px auto 0;
+      max-width: 610px;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      gap: 24px;
+    }
+
+    .grid-cols-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @media (max-width: 920px) {
+      .grid-cols-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 650px) {
+      .hero {
+        min-height: auto;
+        padding-top: 56px;
+      }
+      .section {
+        padding: 48px 18px;
+      }
+      .grid-cols-3 {
+        grid-template-columns: 1fr;
+      }
     }
 
     .card {
-      background: #1e293b;
-      padding: 20px;
-      border-radius: 10px;
-      transition: 0.3s;
-      text-decoration: none;
-      color: white;
-      display: block;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .card:hover {
-      transform: scale(1.05);
-      background: #334155;
+      transform: translateY(-6px);
+      box-shadow: 0 28px 80px rgba(15, 23, 42, 0.12);
     }
 
-    .btn {
-      background: #06b6d4;
-      padding: 10px 20px;
-      border-radius: 5px;
-      color: white;
-      text-decoration: none;
-      display: inline-block;
-      margin-top: 10px;
+    .card h3 {
+      margin: 0 0 14px;
+      font-size: 1.25rem;
     }
 
-    .btn:hover {
-      background: #0284c7;
+    .card p {
+      margin: 0;
+      color: var(--muted);
     }
 
-    footer {
-      text-align: center;
-      padding: 20px;
+    .feature-list {
+      display: grid;
+      gap: 18px;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .feature {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 18px;
+      padding: 28px;
+      background: rgba(15, 118, 110, 0.06);
+      border: 1px solid rgba(15, 118, 110, 0.12);
+      border-radius: 20px;
+    }
+
+    .feature span {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 1.2rem;
+    }
+
+    .feature h3 {
+      margin: 0 0 8px;
+      font-size: 1.1rem;
+    }
+
+    .feature p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .footer {
+      padding: 40px 24px;
       background: #020617;
-      margin-top: 20px;
+      color: #f8fafc;
+    }
+
+    .footer-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .footer p {
+      margin: 0;
+      color: #94a3b8;
+    }
+
+    .badge {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(15, 118, 110, 0.12);
+      color: #115e54;
+      font-weight: 700;
+      font-size: 0.95rem;
     }
   </style>
 </head>
 
 <body>
+  <header>
+    <div class="navbar">
+      <div class="logo">Vinoth Kumar <span>DevOps</span></div>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#blogs">Blogs</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-<header>
-  <h1>🚀 Vinoth Kumar | DevOps Blog</h1>
-</header>
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-inner">
+        <div class="badge">DevOps | Cloud | Automation</div>
+        <h1>Building cloud infrastructure with clarity and automation.</h1>
+        <p>Explore practical DevOps stories, Terraform blueprints, and automation playbooks that help teams ship faster and keep systems reliable.</p>
+        <div class="buttons">
+          <a class="button button-primary" href="#blogs">Read the blogs</a>
+          <a class="button button-secondary" href="#contact">Let&apos;s connect</a>
+        </div>
+      </div>
+    </section>
 
-<nav>
-  <a href="#home">Home</a>
-  <a href="#blogs">Blogs</a>
-  <a href="#contact">Contact</a>
-</nav>
+    <section class="section">
+      <div class="section-heading">
+        <h2>Featured blog categories</h2>
+        <p>Deep dives, hands-on tutorials, and real-world automation patterns for DevOps engineers and cloud builders.</p>
+      </div>
+      <div class="grid grid-cols-3">
+        <a class="card" href="#">
+          <h3>Infrastructure as Code</h3>
+          <p>Terraform modules, remote state patterns, and cloud provisioning best practices.</p>
+        </a>
+        <a class="card" href="#">
+          <h3>Automation &amp; CI/CD</h3>
+          <p>GitHub Actions, pipeline workflows, and deployment automation examples.</p>
+        </a>
+        <a class="card" href="#">
+          <h3>Platform Reliability</h3>
+          <p>Monitoring, security, and operations guidance for production-ready systems.</p>
+        </a>
+      </div>
+    </section>
 
-<!-- HOME -->
-<section id="home" class="hero">
-  <h2>Cloud | DevOps | Automation</h2>
-  <p>Sharing real-world DevOps knowledge and projects</p>
-  <a class="btn" href="#blogs">Explore Blogs</a>
-</section>
+    <section class="section" id="blogs">
+      <div class="section-heading">
+        <h2>Latest posts</h2>
+        <p>Quick access to the latest insights and project summaries from the DevOps journey.</p>
+      </div>
+      <div class="grid grid-cols-3">
+        <a class="card" href="#">
+          <h3>🚀 Ansible Automation</h3>
+          <p>Deploy nginx using playbooks, roles, and templates with repeatable consistency.</p>
+        </a>
+        <a class="card" href="#">
+          <h3>🏗️ Terraform</h3>
+          <p>Provision infrastructure using modular Terraform patterns for Google Cloud.</p>
+        </a>
+        <a class="card" href="#">
+          <h3>🐧 Linux Troubleshooting</h3>
+          <p>Triage issues, debug services, and fix common Linux operational problems.</p>
+        </a>
+      </div>
+    </section>
 
-<!-- BLOGS -->
-<section id="blogs">
-  <h2>📝 Blogs</h2>
+    <section class="section">
+      <div class="section-heading">
+        <h2>What I bring to every project</h2>
+        <p>Thoughtful design, automated delivery, and infrastructure that can grow with your applications.</p>
+      </div>
+      <div class="feature-list">
+        <div class="feature">
+          <span>⚙️</span>
+          <div>
+            <h3>Automation first</h3>
+            <p>Scripts, IaC, and pipelines that reduce manual steps and improve delivery speed.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <span>☁️</span>
+          <div>
+            <h3>Cloud-native</h3>
+            <p>Designs that leverage Google Cloud services and best practices for scalable deployments.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <span>🛡️</span>
+          <div>
+            <h3>Reliable operations</h3>
+            <p>Secure, observable environments built for safe change and dependable uptime.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <div class="container">
-    <a href="#" class="card">
-      <h3>🚀 Ansible Automation</h3>
-      <p>Deploy nginx using playbooks, roles, and templates.</p>
-    </a>
+    <section class="section" id="contact">
+      <div class="section-heading">
+        <h2>Get in touch</h2>
+        <p>Want to collaborate or learn more? Connect on LinkedIn and let&apos;s talk about DevOps systems that work.</p>
+      </div>
+      <div class="feature-list">
+        <div class="feature">
+          <span>🔗</span>
+          <div>
+            <h3>LinkedIn</h3>
+            <p><a href="https://www.linkedin.com/in/1vinoth/" target="_blank">linkedin.com/in/1vinoth/</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-    <a href="#" class="card">
-      <h3>🏗️ Terraform</h3>
-      <p>Provision infrastructure using Terraform modules.</p>
-    </a>
-
-    <a href="#" class="card">
-      <h3>🐧 Linux Troubleshooting</h3>
-      <p>Real-world debugging scenarios and fixes.</p>
-    </a>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" style="text-align:center;">
-  <h2>📬 Contact</h2>
-
-  <p>Connect with me on LinkedIn:</p>
-
-  <a href="https://www.linkedin.com/in/1vinoth/" target="_blank" class="btn">
-    🔗 View My LinkedIn Profile
-  </a>
-</section>
-
-<footer>
-  <p>© 2026 Vinoth Kumar | Built with ❤️ using DevOps</p>
-</footer>
-
+  <footer class="footer">
+    <div class="footer-inner">
+      <p>© 2026 Vinoth Kumar | Built with ❤️ using DevOps</p>
+      <p>Made for cloud builders and automation teams.</p>
+    </div>
+  </footer>
 </body>
 </html>
