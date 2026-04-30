@@ -302,6 +302,73 @@
       color: var(--muted);
     }
 
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 8px 0 0;
+    }
+
+    .tech-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .tech-mark {
+      width: 50px;
+      height: 50px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      color: #fff;
+      font-size: 0.95rem;
+    }
+
+    .tech-card p {
+      margin: 0;
+      font-weight: 700;
+      color: var(--surface-strong);
+      font-size: 0.96rem;
+    }
+
+    .tech-card.github .tech-mark { background: #181717; }
+    .tech-card.actions .tech-mark { background: #2088ff; }
+    .tech-card.docker .tech-mark { background: #2496ed; }
+    .tech-card.kubernetes .tech-mark { background: #326ce5; }
+    .tech-card.aws .tech-mark { background: #ff9900; }
+    .tech-card.azure .tech-mark { background: #0089d6; }
+    .tech-card.gcp .tech-mark { background: #4285f4; }
+    .tech-card.linux .tech-mark { background: #000000; }
+    .tech-card.generative .tech-mark { background: #8b5cf6; }
+    .tech-card.agentic .tech-mark { background: #0ea5e9; }
+
+    @media (max-width: 980px) {
+      .tech-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 650px) {
+      .tech-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 520px) {
+      .tech-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .footer {
       padding: 40px 24px;
       background: #020617;
@@ -399,19 +466,47 @@
         <h2>Core technology disciplines</h2>
         <p>Strategic expertise across source control, cloud platforms, container orchestration, and emerging AI operations.</p>
       </div>
-      <div class="grid grid-cols-3">
-        <a class="card" href="#">
-          <h3>GitHub &amp; CI/CD</h3>
-          <p>Git workflows, GitHub Actions pipelines, code quality automation, and secure release management.</p>
-        </a>
-        <a class="card" href="#">
-          <h3>Cloud &amp; Kubernetes</h3>
-          <p>AWS, Azure, GCP, Docker, and Kubernetes architectures built for scale, resilience, and governance.</p>
-        </a>
-        <a class="card" href="#">
-          <h3>Generative AI</h3>
-          <p>Agentic AI patterns, intelligent automation, and practical AI workflows for operational teams.</p>
-        </a>
+      <div class="tech-grid">
+        <div class="tech-card github">
+          <div class="tech-mark">GH</div>
+          <p>GitHub</p>
+        </div>
+        <div class="tech-card actions">
+          <div class="tech-mark">A</div>
+          <p>GitHub Actions</p>
+        </div>
+        <div class="tech-card docker">
+          <div class="tech-mark">D</div>
+          <p>Docker</p>
+        </div>
+        <div class="tech-card kubernetes">
+          <div class="tech-mark">K8s</div>
+          <p>Kubernetes</p>
+        </div>
+        <div class="tech-card aws">
+          <div class="tech-mark">AWS</div>
+          <p>AWS</p>
+        </div>
+        <div class="tech-card azure">
+          <div class="tech-mark">AZ</div>
+          <p>Azure</p>
+        </div>
+        <div class="tech-card gcp">
+          <div class="tech-mark">GCP</div>
+          <p>GCP</p>
+        </div>
+        <div class="tech-card linux">
+          <div class="tech-mark">TUX</div>
+          <p>Linux</p>
+        </div>
+        <div class="tech-card generative">
+          <div class="tech-mark">AI</div>
+          <p>Generative AI</p>
+        </div>
+        <div class="tech-card agentic">
+          <div class="tech-mark">AG</div>
+          <p>Agentic AI</p>
+        </div>
       </div>
     </section>
 
