@@ -108,6 +108,51 @@
       font-size: 1.05rem;
     }
 
+    .hero-visual {
+      position: relative;
+      margin: 32px auto 0;
+      max-width: 920px;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 30px 90px rgba(15, 23, 42, 0.15);
+    }
+
+    .hero-visual svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+    }
+
+    .hero-visual-meta {
+      position: absolute;
+      inset: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .hero-visual-meta .visual-card {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      border-radius: 24px;
+      padding: 18px 20px;
+      color: var(--surface-strong);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    .hero-visual-meta .visual-card h4 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+    }
+
+    .hero-visual-meta .visual-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
     .buttons {
       display: flex;
       flex-wrap: wrap;
@@ -313,6 +358,38 @@
         <div class="buttons">
           <a class="button button-primary" href="#blogs">Read the blogs</a>
           <a class="button button-secondary" href="#contact">Let&apos;s connect</a>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <svg viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="gradientA" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.9" />
+                <stop offset="100%" stop-color="#7c3aed" stop-opacity="0.8" />
+              </linearGradient>
+              <linearGradient id="gradientB" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0%" stop-color="#10b981" stop-opacity="0.8" />
+                <stop offset="100%" stop-color="#0ea5e9" stop-opacity="0.7" />
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="960" height="540" fill="#0f172a" />
+            <path d="M0 380C120 300 240 420 360 360C480 300 600 420 720 360C840 300 960 420 960 420V540H0V380Z" fill="url(#gradientA)" opacity="0.95"/>
+            <circle cx="760" cy="140" r="110" fill="url(#gradientB)" opacity="0.8" />
+            <path d="M140 220C240 180 330 280 420 240C510 200 600 310 700 260C780 225 850 320 960 260V540H0V220C40 260 80 280 140 220Z" fill="#f8fafc" opacity="0.15"/>
+          </svg>
+          <div class="hero-visual-meta">
+            <div class="visual-card">
+              <h4>Terraform Patterns</h4>
+              <p>Reusable infrastructure modules for cloud environments.</p>
+            </div>
+            <div class="visual-card">
+              <h4>Automation Flow</h4>
+              <p>Pipeline-driven deployments for modern teams.</p>
+            </div>
+            <div class="visual-card">
+              <h4>Reliable Operations</h4>
+              <p>Monitoring, security, and resilience built in.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
