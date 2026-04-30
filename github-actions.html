@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GitHub Actions | Vinoth DevOps Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --accent: #0f766e;
+      --accent-2: #6366f1;
+      --border: rgba(15, 23, 42, 0.08);
+      --shadow: 0 24px 70px rgba(15, 23, 42, 0.1);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at top, #eef2ff 0%, #f8fafc 35%, #ffffff 100%);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      background: rgba(248, 250, 252, 0.96);
+      border-bottom: 1px solid var(--border);
+    }
+    .navbar {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .logo {
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+    .logo span { color: var(--accent); }
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+    nav a:hover { color: var(--surface-strong); }
+    .content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 42px 24px 80px;
+    }
+    .content h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2.6rem, 4vw, 3.6rem);
+      line-height: 1.02;
+    }
+    .content p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin: 0 0 24px;
+    }
+    .article-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+    .article-card h2,
+    .article-card h3 {
+      margin-top: 32px;
+      margin-bottom: 14px;
+      color: var(--surface-strong);
+    }
+    .article-card ul {
+      padding-left: 1.25rem;
+      margin: 0 0 24px;
+      color: var(--muted);
+    }
+    .article-card li {
+      margin-bottom: 12px;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 32px;
+      color: var(--accent);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <div class="logo">Vinoth <span>DevOps</span></div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="index.html#news">News</a>
+        <a href="index.html#blogs">Blogs</a>
+      </nav>
+    </div>
+  </header>
+  <main class="content">
+    <h1>Getting Started with GitHub Actions</h1>
+    <p>Automate your DevOps workflow using GitHub Actions, from builds and tests to Terraform and Kubernetes deployments. This page is your quick-start guide for creating practical pipeline automation inside GitHub.</p>
+    <div class="article-card">
+      <h2>Why GitHub Actions matters</h2>
+      <p>In today’s DevOps-driven world, automation is not optional—it’s essential. GitHub Actions lets you automate everything directly from your repository, including deployments, tests, and infrastructure provisioning.</p>
+      <h3>What is GitHub Actions?</h3>
+      <p>GitHub Actions is a <strong>CI/CD platform</strong> built into GitHub that enables workflows for:</p>
+      <ul>
+        <li>Building code</li>
+        <li>Running tests</li>
+        <li>Deploying applications</li>
+        <li>Managing infrastructure (Terraform, Kubernetes, etc.)</li>
+      </ul>
+      <h3>Key concepts</h3>
+      <ul>
+        <li><strong>Workflow</strong> — an automated process defined in a YAML file.</li>
+        <li><strong>Event</strong> — triggers that start a workflow, like <code>push</code> or <code>pull_request</code>.</li>
+        <li><strong>Job</strong> — a set of steps that run on the same machine.</li>
+        <li><strong>Step</strong> — an individual task, such as running a command or using an action.</li>
+        <li><strong>Runner</strong> — the machine on which the workflow executes.</li>
+      </ul>
+      <h3>Your first workflow</h3>
+      <p>Create <code>.github/workflows/main.yml</code> to start automating your DevOps pipeline.</p>
+      <pre style="background: rgba(15,23,42,0.08); border-radius: 16px; padding: 18px; overflow-x: auto;">name: CI Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run a simple command
+        run: echo "Hello, DevOps 🚀"
+      </pre>
+      <h3>Terraform workflow</h3>
+      <p>Build a practical pipeline for infrastructure validation and planning.</p>
+      <pre style="background: rgba(15,23,42,0.08); border-radius: 16px; padding: 18px; overflow-x: auto;">name: Terraform CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Plan
+        run: terraform plan
+      </pre>
+    </div>
+    <a class="back-link" href="index.html">← Back to homepage</a>
+  </main>
+</body>
+</html>
